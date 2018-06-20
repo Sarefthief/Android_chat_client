@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Android_chat_client</string>
-    <string name="enter_your_nickname">Enter server info and nickname</string>
+    <string name="enter_your_nickname">Enter server info</string>
     <string name="connect">Connect</string>
     <string name="name">Name</string>
     <string name="address">Address</string>
     <string name="port">Port</string>
+    <string name="nickname">Enter your nickname</string>
+    <string name="nicknameButton">Submit</string>
 </resources>

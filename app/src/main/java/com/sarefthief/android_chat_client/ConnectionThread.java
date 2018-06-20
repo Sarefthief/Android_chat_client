@@ -7,9 +7,12 @@ public class ConnectionThread extends Thread
 {
     private String address;
     private int port;
+    private Socket socket;
+    private ConnectionActivity conAct;
 
-    ConnectionThread(String address, int port)
+    ConnectionThread(ConnectionActivity conAct,String address, int port)
     {
+        this.conAct = conAct;
         this.address = address;
         this.port = port;
     }
@@ -17,9 +20,12 @@ public class ConnectionThread extends Thread
     public void run()
     {
         try{
-            Socket socket = new Socket(address, port);
+            socket = new Socket(address, port);
         } catch (IOException ex){
 
+        } catch (IllegalStateException ex){
+            conAct.getAddressText().setError("сас");
+            conAct.getPortText().setError("сас");
         }
     }
 }
