@@ -36,7 +36,7 @@ public class ConnectionActivity extends AppCompatActivity
             } catch (NumberFormatException ex){
                 portText.setError("Port must be the number");
             }
-            ConnectionTask connection = new ConnectionTask(address, port, error);
+            ConnectionTask connection = new ConnectionTask(this, address, port, error);
             connection.execute();
         } else {
             portText.setError("Specify port number");
