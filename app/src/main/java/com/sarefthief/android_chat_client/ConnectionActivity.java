@@ -8,39 +8,55 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ConnectionActivity extends AppCompatActivity {
+public class ConnectionActivity extends AppCompatActivity
+{
 
     private TextView addressText;
     private TextView portText;
-    private TextView text;
+    private TextView error;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connection);
         addressText = findViewById(R.id.addressText);
         portText = findViewById(R.id.portText);
-        text = findViewById(R.id.nameText);
+        error = findViewById(R.id.error);
     }
 
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         int port = 0;
         String address;
         if ((!addressText.getText().toString().equals(""))&&(!portText.getText().toString().equals(""))){
             address = addressText.getText().toString();
-            port = Integer.parseInt(portText.getText().toString());
-            new ConnectionThread(this, address, port).start();
+            try{
+                port = Integer.parseInt(portText.getText().toString());
+            } catch (NumberFormatException ex){
+                portText.setError("Port must be the number");
+            }
+            ConnectionTask connection = new ConnectionTask(address, port, error);
+            connection.execute();
         } else {
             portText.setError("Specify port number");
             addressText.setError("Specify server address");
         }
     }
 
-    public TextView getAddressText() {
+    public void test()
+    {
+        portText.setError("Specify port number");
+        addressText.setError("Specify server address");
+    }
+
+    public TextView getAddressText()
+    {
         return addressText;
     }
 
-    public TextView getPortText() {
+    public TextView getPortText()
+    {
         return portText;
     }
 }
