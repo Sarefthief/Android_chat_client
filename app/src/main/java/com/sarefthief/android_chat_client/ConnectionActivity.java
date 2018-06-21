@@ -14,6 +14,7 @@ public class ConnectionActivity extends AppCompatActivity
     private TextView addressText;
     private TextView portText;
     private TextView error;
+    private SocketApplication socketApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,6 +24,7 @@ public class ConnectionActivity extends AppCompatActivity
         addressText = findViewById(R.id.addressText);
         portText = findViewById(R.id.portText);
         error = findViewById(R.id.error);
+        socketApp = ((SocketApplication) getApplication());
     }
 
     public void onClick(View view)
@@ -36,27 +38,11 @@ public class ConnectionActivity extends AppCompatActivity
             } catch (NumberFormatException ex){
                 portText.setError("Port must be the number");
             }
-            ConnectionTask connection = new ConnectionTask(this, address, port, error);
+            ConnectionTask connection = new ConnectionTask(socketApp,this, address, port, error);
             connection.execute();
         } else {
             portText.setError("Specify port number");
             addressText.setError("Specify server address");
         }
-    }
-
-    public void test()
-    {
-        portText.setError("Specify port number");
-        addressText.setError("Specify server address");
-    }
-
-    public TextView getAddressText()
-    {
-        return addressText;
-    }
-
-    public TextView getPortText()
-    {
-        return portText;
     }
 }

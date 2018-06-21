@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-class ConnectionTask extends AsyncTask<Void, Void, Boolean>
+class ConnectionTask extends AsyncTask<Void, Void, Void>
 {
     private String address;
     private int port;
@@ -15,36 +15,34 @@ class ConnectionTask extends AsyncTask<Void, Void, Boolean>
     private TextView error;
     private String errorText;
     private ConnectionActivity conAct;
+    private SocketApplication socketApp;
 
-    ConnectionTask(ConnectionActivity conAct,String address, int port, TextView error)
+    ConnectionTask(SocketApplication socketApp, ConnectionActivity conAct, String address, int port, TextView error)
     {
         this.conAct = conAct;
         this.error = error;
         this.address = address;
         this.port = port;
+        this.socketApp = socketApp;
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
-
-    @Override
-    protected Boolean doInBackground(Void... params)
+    protected Void doInBackground(Void... params)
     {
         try {
-            Socket socket = new Socket(address, port);
+            socketApp.setSocket(new Socket(address, port));
             connection = true;
         } catch (UnknownHostException ex){
             errorText = "This server is unavailable";
         } catch (IOException ex) {
             errorText = "Connection error";
         }
-        return connection;
+        return null;
     }
 
     @Override
-    protected void onPostExecute(Boolean result) {
+    protected void onPostExecute(Void result)
+    {
         super.onPostExecute(result);
         if(!connection){
             error.setText(errorText);
