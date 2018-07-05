@@ -7,4 +7,6 @@
     <string name="port">Port</string>
     <string name="nickname">Enter your nickname</string>
     <string name="nicknameButton">Submit</string>
+    <string name="SendMessageButton">Send</string>
+    <string name="Message">Type your message</string>
 </resources>
