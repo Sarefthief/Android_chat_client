@@ -11,6 +11,7 @@ public class SocketApplication extends Application
     private Socket socket;
     private ObjectInputStream ObjectIn;
     private ObjectOutputStream ObjectOut;
+    private String nickname;
 
     public Socket getSocket()
     {
@@ -40,5 +41,13 @@ public class SocketApplication extends Application
     public void setObjectOut(ObjectOutputStream objectOut)
     {
         ObjectOut = objectOut;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

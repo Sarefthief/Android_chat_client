@@ -58,6 +58,7 @@ public class NicknameTask extends AsyncTask<Void, Void, Void>
         if(!check){
             nameText.setError(error);
         } else {
+            socketApp.setNickname(nickname);
             Intent intent = new Intent(nickAct, ChatActivity.class);
             nickAct.startActivity(intent);
         }

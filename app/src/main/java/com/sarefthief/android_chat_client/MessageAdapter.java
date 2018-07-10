@@ -26,7 +26,12 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         // Lookup view for data population
         TextView tvMessage = convertView.findViewById(R.id.tvMessage);
         // Populate the data into the template view using the data object
-        tvMessage.setText(message.getMessage());
+        try{
+            tvMessage.setText(message.getUsername().toString());
+        } catch (NullPointerException ex){
+            tvMessage.setText("error");
+        }
+
         // Return the completed view to render on screen
         return convertView;
     }

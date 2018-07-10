@@ -11,22 +11,41 @@ import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
-    TextView chat;
+    ArrayList<Message> arrayOfUsers;
+    MessageAdapter adapter;
+    private SocketApplication socketApp;
+    private TextView messageText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        //chat = findViewById(R.id.chatView);
-        //chat.setMovementMethod(new ScrollingMovementMethod());
+        socketApp = ((SocketApplication) getApplication());
+        messageText = findViewById(R.id.messageText);
 
-        ArrayList<Message> arrayOfUsers = new ArrayList<Message>();
-        MessageAdapter adapter = new MessageAdapter(this, arrayOfUsers);
+        arrayOfUsers = new ArrayList<Message>();
+        adapter = new MessageAdapter(this, arrayOfUsers);
         ListView listView = findViewById(R.id.messages);
         listView.setAdapter(adapter);
+
+        ReadTask readTask = new ReadTask(socketApp, this);
+        readTask.execute();
     }
 
     public void onClick(View view)
     {
+        if(!messageText.getText().toString().equals("")){
+            Message message = new Message(socketApp.getNickname(), messageText.getText().toString());
+            WriterTask writerTask = new WriterTask(socketApp, message);
+            writerTask.execute();
+            populateMessage(message);
+        } else {
+            messageText.setError("Specify the nickname");
+        }
+    }
 
+    public void populateMessage(Message message)
+    {
+        adapter.add(message);
     }
 }
