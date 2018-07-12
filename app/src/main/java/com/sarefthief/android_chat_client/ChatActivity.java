@@ -2,12 +2,14 @@ package com.sarefthief.android_chat_client;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -35,12 +37,11 @@ public class ChatActivity extends AppCompatActivity {
     public void onClick(View view)
     {
         if(!messageText.getText().toString().equals("")){
-            Message message = new Message(socketApp.getNickname(), messageText.getText().toString());
+            Message message = new Message(socketApp.getNickname(), messageText.getText().toString(),new Date());
             WriterTask writerTask = new WriterTask(socketApp, message);
             writerTask.execute();
             populateMessage(message);
-        } else {
-            messageText.setError("Specify the nickname");
+            messageText.setText("");
         }
     }
 

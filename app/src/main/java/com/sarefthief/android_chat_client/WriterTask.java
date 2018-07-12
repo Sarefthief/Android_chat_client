@@ -1,7 +1,6 @@
 package com.sarefthief.android_chat_client;
 
 import android.os.AsyncTask;
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
