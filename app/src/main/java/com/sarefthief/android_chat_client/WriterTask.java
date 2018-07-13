@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import client.Message;
+
 public class WriterTask extends AsyncTask<Void, Void, Void>
 {
     private SocketApplication socketApp;
@@ -22,6 +24,7 @@ public class WriterTask extends AsyncTask<Void, Void, Void>
     {
         try{
             objectOut.writeObject(message);
+            objectOut.flush();
         } catch (IOException ex){
 
         }

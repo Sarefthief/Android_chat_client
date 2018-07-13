@@ -11,6 +11,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import client.Message;
+
 public class MessageAdapter extends ArrayAdapter<Message> {
 
     public MessageAdapter(Context context, ArrayList<Message> users) {

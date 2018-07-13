@@ -9,6 +9,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Date;
 
+import client.Message;
+
 public class ChatActivity extends AppCompatActivity {
 
     ArrayList<Message> arrayOfUsers;

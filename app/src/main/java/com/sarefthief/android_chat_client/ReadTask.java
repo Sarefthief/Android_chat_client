@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import client.Message;
+
 public class ReadTask extends AsyncTask<Void, Void, Void>
 {
     private SocketApplication socketApp;
@@ -33,8 +35,8 @@ public class ReadTask extends AsyncTask<Void, Void, Void>
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        chatAct.populateMessage(message);
         ReadTask readTask = new ReadTask(socketApp, chatAct);
         readTask.execute();
+        chatAct.populateMessage(message);
     }
 }
