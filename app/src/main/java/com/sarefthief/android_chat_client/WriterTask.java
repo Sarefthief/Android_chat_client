@@ -24,7 +24,6 @@ public class WriterTask extends AsyncTask<Void, Void, Void>
     {
         try{
             objectOut.writeObject(message);
-            objectOut.flush();
         } catch (IOException ex){
 
         }

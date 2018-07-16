@@ -1,5 +1,6 @@
 package com.sarefthief.android_chat_client;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class ChatActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         ReadTask readTask = new ReadTask(socketApp, this);
-        readTask.execute();
+        readTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void onClick(View view)
@@ -39,7 +40,7 @@ public class ChatActivity extends AppCompatActivity {
         if(!messageText.getText().toString().equals("")){
             Message message = new Message(socketApp.getNickname(), messageText.getText().toString(),new Date());
             WriterTask writerTask = new WriterTask(socketApp, message);
-            writerTask.execute();
+            writerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             populateMessage(message);
             messageText.setText("");
         }
