@@ -26,7 +26,7 @@ public class ChatActivity extends AppCompatActivity {
         socketApp = ((SocketApplication) getApplication());
         messageText = findViewById(R.id.messageText);
 
-        arrayOfUsers = new ArrayList<Message>();
+        arrayOfUsers = new ArrayList<>();
         adapter = new MessageAdapter(this, arrayOfUsers);
         ListView listView = findViewById(R.id.messages);
         listView.setAdapter(adapter);

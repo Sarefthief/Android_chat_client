@@ -1,6 +1,8 @@
 package com.sarefthief.android_chat_client;
 
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +32,16 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         TextView tvMessage = convertView.findViewById(R.id.tvMessage);
         TextView tvUsername = convertView.findViewById(R.id.tvUserName);
         TextView tvDate = convertView.findViewById(R.id.tvDate);
+        TextView messageText = findViewById(R.id.messageText);
 
         try{
+            SpannableString ss = new SpannableString(message.getUsername());
+            ClickableSpan clickableSpan = new ClickableSpan() {
+                @Override
+                public void onClick(View textView) {
+                    startActivity(new Intent(MyActivity.this, NextActivity.class));
+                }
+            };
             tvMessage.setText(message.getMessage());
             tvUsername.setText(message.getUsername());
             tvDate.setText(dateFormat.format(message.getDate()));

@@ -36,7 +36,7 @@ public class ReadTask extends AsyncTask<Void, Void, Void>
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         ReadTask readTask = new ReadTask(socketApp, chatAct);
-        readTask.execute();
+        readTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         chatAct.populateMessage(message);
     }
 }
