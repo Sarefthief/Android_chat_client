@@ -41,7 +41,18 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 public void onClick(View textView) {
                     startActivity(new Intent(MyActivity.this, NextActivity.class));
                 }
+                @Override
+                public void updateDrawState(TextPaint ds) {
+                    super.updateDrawState(ds);
+                    ds.setUnderlineText(false);
+                }
             };
+            ss.setSpan(clickableSpan, 22, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            TextView textView = (TextView) findViewById(R.id.messageText);
+            textView.setText(ss);
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
+            textView.setHighlightColor(Color.TRANSPARENT);
             tvMessage.setText(message.getMessage());
             tvUsername.setText(message.getUsername());
             tvDate.setText(dateFormat.format(message.getDate()));
