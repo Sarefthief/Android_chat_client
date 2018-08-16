@@ -1,7 +1,11 @@
 package com.sarefthief.android_chat_client;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,44 +21,40 @@ import client.Message;
 
 public class MessageAdapter extends ArrayAdapter<Message> {
 
+    private View chat;
+
     public MessageAdapter(Context context, ArrayList<Message> users) {
         super(context, 0, users);
+        chat = View.inflate(context, R.layout.activity_chat, null);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Message message = getItem(position);
+        final Message message = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_message, parent, false);
         }
         TextView tvMessage = convertView.findViewById(R.id.tvMessage);
         TextView tvUsername = convertView.findViewById(R.id.tvUserName);
         TextView tvDate = convertView.findViewById(R.id.tvDate);
-        TextView messageText = findViewById(R.id.messageText);
+        final TextView messageText = chat.findViewById(R.id.messageText);
 
         try{
             SpannableString ss = new SpannableString(message.getUsername());
             ClickableSpan clickableSpan = new ClickableSpan() {
                 @Override
                 public void onClick(View textView) {
-                    startActivity(new Intent(MyActivity.this, NextActivity.class));
-                }
-                @Override
-                public void updateDrawState(TextPaint ds) {
-                    super.updateDrawState(ds);
-                    ds.setUnderlineText(false);
+                    messageText.setText("/w " + message.getUsername());
                 }
             };
-            ss.setSpan(clickableSpan, 22, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(clickableSpan, 0, message.getUsername().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            TextView textView = (TextView) findViewById(R.id.messageText);
-            textView.setText(ss);
-            textView.setMovementMethod(LinkMovementMethod.getInstance());
-            textView.setHighlightColor(Color.TRANSPARENT);
             tvMessage.setText(message.getMessage());
-            tvUsername.setText(message.getUsername());
+            tvUsername.setText(ss);
+            tvUsername.setMovementMethod(LinkMovementMethod.getInstance());
+            tvUsername.setHighlightColor(Color.TRANSPARENT);
             tvDate.setText(dateFormat.format(message.getDate()));
         } catch (NullPointerException ex){
             tvDate.setText("error");
