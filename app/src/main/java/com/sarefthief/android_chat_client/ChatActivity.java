@@ -41,6 +41,12 @@ public class ChatActivity extends AppCompatActivity {
             Message message = new Message(socketApp.getNickname(), messageText.getText().toString(),new Date());
             WriterTask writerTask = new WriterTask(socketApp, message);
             writerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            if((message.getMessage().charAt(0) == '/')&&(message.getMessage().charAt(1) == 'w')){
+                String[] words = message.getMessage().split(" ");
+                StringBuilder builder = new StringBuilder(message.getMessage());
+                message.setMessage(builder.substring(4 + words[1].length()));
+                message.setUsername(message.getUsername() + "(To " + words[1] + ")");
+            }
             populateMessage(message);
             messageText.setText("");
         }
