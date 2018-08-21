@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class ChatActivity extends AppCompatActivity {
         ReadTask readTask = new ReadTask(socketApp, this);
         readTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
+
 
     public void onClick(View view)
     {

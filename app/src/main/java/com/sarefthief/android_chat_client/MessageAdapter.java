@@ -42,7 +42,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         final TextView messageText = chat.findViewById(R.id.messageText);
 
         try{
-            /*SpannableString ss = new SpannableString(message.getUsername());
+            SpannableString ss = new SpannableString(message.getUsername());
             ClickableSpan clickableSpan = new ClickableSpan() {
                 @Override
                 public void onClick(View textView) {
@@ -54,7 +54,13 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 
             tvUsername.setText(ss);
             tvUsername.setMovementMethod(LinkMovementMethod.getInstance());
-            tvUsername.setHighlightColor(Color.TRANSPARENT);*/
+            tvUsername.setHighlightColor(Color.TRANSPARENT);
+            tvUsername.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    messageText.setText("/w " + message.getUsername());
+                }
+            });
             tvMessage.setText(message.getMessage());
             tvDate.setText(dateFormat.format(message.getDate()));
         } catch (NullPointerException ex){
