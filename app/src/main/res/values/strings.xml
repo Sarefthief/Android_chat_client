@@ -9,4 +9,5 @@
     <string name="nicknameButton">Submit</string>
     <string name="SendMessageButton">Send</string>
     <string name="Message">Type your message</string>
+    <string name="messageAdapterPrivate">(Private)</string>
 </resources>

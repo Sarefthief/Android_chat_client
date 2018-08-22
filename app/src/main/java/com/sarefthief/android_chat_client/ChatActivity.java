@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,10 +15,10 @@ import client.Message;
 
 public class ChatActivity extends AppCompatActivity {
 
-    ArrayList<Message> arrayOfUsers;
+    ArrayList<Message> arrayOfMesages;
     MessageAdapter adapter;
     private SocketApplication socketApp;
-    private TextView messageText;
+    private EditText messageText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class ChatActivity extends AppCompatActivity {
         socketApp = ((SocketApplication) getApplication());
         messageText = findViewById(R.id.messageText);
 
-        arrayOfUsers = new ArrayList<>();
-        adapter = new MessageAdapter(this, arrayOfUsers);
+        arrayOfMesages = new ArrayList<>();
+        adapter = new MessageAdapter(this, arrayOfMesages, messageText, socketApp.getNickname());
         ListView listView = findViewById(R.id.messages);
         listView.setAdapter(adapter);
 
@@ -43,12 +43,6 @@ public class ChatActivity extends AppCompatActivity {
             Message message = new Message(socketApp.getNickname(), messageText.getText().toString(),new Date());
             WriterTask writerTask = new WriterTask(socketApp, message);
             writerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            if((message.getMessage().charAt(0) == '/')&&(message.getMessage().charAt(1) == 'w')){
-                String[] words = message.getMessage().split(" ");
-                StringBuilder builder = new StringBuilder(message.getMessage());
-                message.setMessage(builder.substring(4 + words[1].length()));
-                message.setUsername(message.getUsername() + "(To " + words[1] + ")");
-            }
             populateMessage(message);
             messageText.setText("");
         }
