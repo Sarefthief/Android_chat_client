@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Date;
-
 import client.Message;
 
 public class ChatActivity extends AppCompatActivity {
 
-    ArrayList<Message> arrayOfMesages;
+    ArrayList<Message> messages;
     MessageAdapter adapter;
     private SocketApplication socketApp;
     private EditText messageText;
@@ -27,15 +24,14 @@ public class ChatActivity extends AppCompatActivity {
         socketApp = ((SocketApplication) getApplication());
         messageText = findViewById(R.id.messageText);
 
-        arrayOfMesages = new ArrayList<>();
-        adapter = new MessageAdapter(this, arrayOfMesages, messageText, socketApp.getNickname());
+        messages = new ArrayList<>();
+        adapter = new MessageAdapter(this, messages, messageText, socketApp.getNickname());
         ListView listView = findViewById(R.id.messages);
         listView.setAdapter(adapter);
 
         ReadTask readTask = new ReadTask(socketApp, this);
         readTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
-
 
     public void onClick(View view)
     {

@@ -2,14 +2,12 @@ package com.sarefthief.android_chat_client;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,10 +54,15 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             }
             tvDate.setText(dateFormat.format(message.getDate()));
             tvUsername.setText(message.getUsername());
+            if (tvUsername.getText().equals("Server")){
+                tvUsername.setTextColor(Color.RED);
+            } else {
+                tvUsername.setTextColor(Color.BLUE);
+            }
             tvUsername.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(!tvUsername.getText().equals(nickname)){
+                    if((!tvUsername.getText().equals(nickname))&&(!tvUsername.getText().equals("Server"))){
                         messageText.setText("/w " + tvUsername.getText() + " ");
                         messageText.setSelection(messageText.getText().length());
                     }

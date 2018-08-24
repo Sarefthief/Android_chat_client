@@ -14,15 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConnectionActivity">
+        <activity android:name=".ConnectionActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NicknameActivity" />
-        <activity android:name=".ChatActivity" />
+        <activity android:name=".NicknameActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".ChatActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
     </application>
 
 </manifest>
