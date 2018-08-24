@@ -8,7 +8,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvNicknameSection"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/colorBlack" />
 
     <LinearLayout
         android:id="@+id/tvNicknameSection"
@@ -25,7 +26,8 @@
             android:id="@+id/tvPrivate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:linksClickable="true" />
+            android:linksClickable="true"
+            android:textColor="@color/colorPurple" />
     </LinearLayout>
 
     <TextView

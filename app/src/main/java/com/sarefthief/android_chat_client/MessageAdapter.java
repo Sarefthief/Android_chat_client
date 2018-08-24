@@ -39,6 +39,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         TextView tvPrivate = convertView.findViewById(R.id.tvPrivate);
 
         try{
+            tvUsername.setText(message.getUsername());
             if((message.getMessage().charAt(0) == '/')&&(message.getMessage().charAt(1) == 'w')){
                 String[] words = message.getMessage().split(" ");
                 StringBuilder builder = new StringBuilder(message.getMessage());
@@ -48,17 +49,20 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 } else {
                     tvPrivate.setText("(To " + words[1] + ")");
                 }
+                tvUsername.setTextColor(Color.parseColor("#C400AB"));
+                tvUsername.getPaint().setUnderlineText(true);
             } else {
                 tvMessage.setText(message.getMessage());
                 tvPrivate.setText("");
+                if (tvUsername.getText().equals("Server")){
+                    tvUsername.setTextColor(Color.RED);
+                    tvUsername.getPaint().setUnderlineText(false);
+                } else {
+                    tvUsername.setTextColor(Color.BLUE);
+                    tvUsername.getPaint().setUnderlineText(true);
+                }
             }
             tvDate.setText(dateFormat.format(message.getDate()));
-            tvUsername.setText(message.getUsername());
-            if (tvUsername.getText().equals("Server")){
-                tvUsername.setTextColor(Color.RED);
-            } else {
-                tvUsername.setTextColor(Color.BLUE);
-            }
             tvUsername.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
