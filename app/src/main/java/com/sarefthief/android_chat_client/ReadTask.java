@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import client.Message;
+import server.Message;
 
 public class ReadTask extends AsyncTask<Void, Void, Void>
 {

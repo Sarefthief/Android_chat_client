@@ -39,7 +39,7 @@ public class NicknameTask extends AsyncTask<Void, Void, Void>
 
             writer.println(nickname);
             String checkStr = reader.readLine();
-            if (checkStr.equals("0")){
+            if (checkStr.equals("nickname is occupied")){
                 error = "Nickname is occupied";
             } else {
                 check = true;

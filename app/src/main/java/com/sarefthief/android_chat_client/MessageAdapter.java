@@ -12,7 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import client.Message;
+import server.Message;
 
 public class MessageAdapter extends ArrayAdapter<Message> {
 

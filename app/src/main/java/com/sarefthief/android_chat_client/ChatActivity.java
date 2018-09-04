@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Date;
-import client.Message;
+import server.Message;
 
 public class ChatActivity extends AppCompatActivity {
 

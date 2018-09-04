@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import client.Message;
+import server.Message;
 
 public class WriterTask extends AsyncTask<Void, Void, Void>
 {
