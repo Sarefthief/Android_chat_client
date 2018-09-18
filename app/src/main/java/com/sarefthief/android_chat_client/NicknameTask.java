@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
 
 public class NicknameTask extends AsyncTask<Void, Void, Void>
 {
@@ -18,7 +21,6 @@ public class NicknameTask extends AsyncTask<Void, Void, Void>
     private NicknameActivity nickAct;
     private boolean check = false;
     private String nickname;
-    private String error;
     private PrintWriter writer;
     private BufferedReader reader;
     private SocketApplication socketApp;
@@ -39,14 +41,27 @@ public class NicknameTask extends AsyncTask<Void, Void, Void>
 
             writer.println(nickname);
             String checkStr = reader.readLine();
-            if (checkStr.equals("nickname is occupied")){
-                error = "Nickname is occupied";
-            } else {
+            if (!checkStr.equals("nickname is occupied")){
                 check = true;
             }
+
             socketApp.setObjectIn(new ObjectInputStream(socketApp.getSocket().getInputStream()));
+
+            String nameOfUserInChat;
+
+            while(true){
+                nameOfUserInChat = reader.readLine();
+                if(!nameOfUserInChat.equals("Server")){
+                    socketApp.addUserInAList(nameOfUserInChat);
+                } else {
+                    break;
+                }
+            }
+
+
+
         } catch (IOException ex){
-            error = "Connection error";
+
         }
 
         return null;
@@ -56,7 +71,7 @@ public class NicknameTask extends AsyncTask<Void, Void, Void>
     {
         super.onPostExecute(result);
         if(!check){
-            nameText.setError(error);
+            nameText.setError("Nickname is occupied");
         } else {
             socketApp.setNickname(nickname);
             Intent intent = new Intent(nickAct, ChatActivity.class);

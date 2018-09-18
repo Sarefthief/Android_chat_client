@@ -17,8 +17,6 @@ public class NicknameActivity extends AppCompatActivity
 
     private TextView nameText;
     private SocketApplication socketApp;
-    private PrintWriter writer;
-    private BufferedReader reader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

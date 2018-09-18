@@ -5,6 +5,7 @@ import android.app.Application;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class SocketApplication extends Application
 {
@@ -12,6 +13,7 @@ public class SocketApplication extends Application
     private ObjectInputStream ObjectIn;
     private ObjectOutputStream ObjectOut;
     private String nickname;
+    private ArrayList<String> usersInChat = new ArrayList<>();
 
     public Socket getSocket()
     {
@@ -49,5 +51,13 @@ public class SocketApplication extends Application
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public ArrayList<String> getUsersInChat() {
+        return usersInChat;
+    }
+
+    public void addUserInAList(String user) {
+        usersInChat.add(user);
     }
 }
